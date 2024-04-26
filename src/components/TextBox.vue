@@ -34,40 +34,69 @@
         </div>
     </div>
 
-    <div class="stacks" v-show="activeButton === 'front-end'">
-        <div class="button-arrow" :class="{ 'hidden': currentIndex === 0 }" @click="navigateLeft">
-            <img src="../assets/images/arrow-left.png" alt="Arrow Left">
+    <div class="toolbar">
+        <div class="stacks" v-show="activeButton === 'front-end'">
+            <div class="button-arrow" :class="{ 'hidden': currentIndex === 0 }" @click="navigateLeft">
+                <img src="../assets/images/arrow-left.png" alt="Arrow Left">
+            </div>
+            <div class="row-stack">
+                <div class="stack stack-front pink" @click="selectStack('SASS')">
+                    <img src="../assets/images/sass.png" alt="SASS">
+                </div>
+                <div class="stack stack-front green" @click="selectStack('VUE')">
+                    <img src="../assets/images/vue.png" alt="VUE">
+                </div>
+                <div class="stack stack-front blue" @click="selectStack('Typescript')">
+                    <img src="../assets/images/ts.png" alt="Typescript">
+                </div>
+                <div class="stack stack-front white" @click="selectStack('Github')">
+                    <img src="../assets/images/github.png" alt="Github">
+                </div>
+                <div class="stack stack-front orange" @click="selectStack('HTML')">
+                    <img src="../assets/images/html.png" alt="HTML">
+                </div>
+                <div class="stack stack-front yellow" @click="selectStack('Javascript')">
+                    <img src="../assets/images/js.png" alt="Javascript">
+                </div>
+                <div class="stack stack-front blue" @click="selectStack('CSS')">
+                    <img src="../assets/images/css.png" alt="CSS">
+                </div>
+            </div>
+            <div class="button-arrow" :class="{ 'hidden': currentIndex + itemsPerPage >= stacks.length }"
+                @click="navigateRight">
+                <img src="../assets/images/arrow-right.png" alt="Arrow Right">
+            </div>
         </div>
-        <div class="row-stack">
-            <div class="stack stack-front pink" @click="selectStack('SASS')">
-                <img src="../assets/images/sass.png" alt="SASS">
-            </div>
-            <div class="stack stack-front green" @click="selectStack('VUE')">
-                <img src="../assets/images/vue.png" alt="VUE">
-            </div>
-            <div class="stack stack-front blue" @click="selectStack('Typescript')">
-                <img src="../assets/images/ts.png" alt="Typescript">
-            </div>
-            <div class="stack stack-front white" @click="selectStack('Github')">
-                <img src="../assets/images/github.png" alt="GIthub">
-            </div>
-            <div class="stack stack-front orange" @click="selectStack('HTML')">
-                <img src="../assets/images/html.png" alt="HTML">
-            </div>
-            <div class="stack stack-front yellow" @click="selectStack('Javascript')">
-                <img src="../assets/images/js.png" alt="Javascript">
-            </div>
-            <div class="stack stack-front blue" @click="selectStack('CSS')">
-                <img src="../assets/images/css.png" alt="CSS">
-            </div>
+
+        <div class="terminal">
+            <h2>SASS</h2>
+            <hr>
+            <p>Lorem ipsum dolor sit amet consectetur. Est ac tristique congue at nunc. Urna ullamcorper tortor blandit
+                at interdum eget. Ut ipsum ut dolor dolor diam in. Pharetra sit ultrices vitae turpis augue tempor.
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur. Est ac tristique congue at nunc. Urna ullamcorper tortor blandit
+                at interdum eget. Ut ipsum ut dolor dolor diam in. Pharetra sit ultrices vitae turpis augue tempor.
+            </p>
+            <p>Lorem ipsum dolor sit amet consectetur. Est ac tristique congue at nunc. Urna ullamcorper tortor blandit
+                at interdum eget. Ut ipsum ut dolor dolor diam in. Pharetra sit ultrices vitae turpis augue tempor.
+            </p>
         </div>
-        <div class="button-arrow" :class="{ 'hidden': currentIndex + itemsPerPage >= stacks.length }"
-            @click="navigateRight">
-            <img src="../assets/images/arrow-right.png" alt="Arrow Right">
+
+        <div>
+            <b-overlay :show="show" rounded="sm">
+                <div class="image-container">
+                    <img src="../assets/images/Mask group.png" alt="Imagem de fundo">
+                    <div class="overlay-content">
+                        <b-card title="Card com sobreposição" :aria-hidden="show ? 'true' : null">
+                            <b-card-text>Veja mais sobre nosso sistema</b-card-text>
+                        </b-card>
+                    </div>
+                </div>
+            </b-overlay>
+            <span class="button-overlay" @click="show = !show">Visualizar <img src="../assets/images/arrow.png"
+                    alt=""></span>
         </div>
     </div>
-
-
 </template>
 
 <script>
@@ -241,19 +270,17 @@ h1 {
 .stacks {
     display: flex;
     justify-content: space-between;
-    width: 504px;
+    width: 40%;
     height: 113px;
     border-radius: 67.57px;
     background: #D9D9D9;
-    margin-left: 9.9%;
-    margin-top: 2%;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
     padding: 5px;
     padding-right: 0%;
+    margin-right:5%;
 }
-
 
 .row-stack {
     display: flex;
@@ -285,5 +312,106 @@ h1 {
 
 .button-arrow{
     cursor: pointer;
+}
+
+.terminal {
+    background-color: #ececec;
+    color: #000000;
+    width: 480px;
+    height: 311px;
+    padding: 20px;
+    border-radius: 25px;
+    border: 1px solid black;
+    font-family: Poppins;
+    overflow: auto;
+    margin-right: 8%;
+}
+
+.terminal h2 {
+    font-family: Poppins;
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 16.5px;
+    text-align: left;
+}
+
+.terminal p {
+    font-family: Poppins;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 13.2px;
+    text-align: left;
+    margin-top: 5%;
+}
+
+hr {
+    border: none;
+    height: 1px;
+    background-color: #000000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.image-container {
+    position: relative;
+    width: 288px;
+    height: 311px;
+    background-color: #4c577d;
+    border-radius: 20px;
+}
+
+.image-container img {
+    width: fit-content;
+    height: 98%;
+    object-fit: cover;
+}
+
+.overlay-content {
+    position: absolute;
+    bottom: 0;
+    left: 2%;
+    top: 69%;
+    width: 96%;
+    height: 30%;
+    display: flex;
+    justify-content: center;
+    background-color: rgba(245, 245, 245, 0.5);
+    backdrop-filter: blur(10px);
+    text-align: top;
+    font-size: 14px;
+    border-radius: 18px;
+    opacity: 10;
+    padding: 6%;
+}
+
+.button-overlay {
+    cursor: pointer;
+    position: absolute;
+    top: 83%;
+    left: 90%;
+    background-color: #4c577d;
+    border-radius: 20px;
+    width: 9%;
+    height: 10%;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 15px;
+    padding-right: 15px;
+    align-items: center;
+    color: white;
+    font-family: Poppins;
+    font-size: 12.4px;
+    font-weight: 400;
+    line-height: 13.64px;
+    text-align: left;
+}
+
+.toolbar {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+    margin-top: 4%;
+    position: relative;
+    left: 10%;
 }
 </style>
