@@ -4,15 +4,15 @@
             Bem-vido ao<br>Tutilabs
             <img class="waving" src="../assets/HandWaving.svg" alt="hand waving">
         </h1>
-        
+
         <img class="plush" src="../assets/Mask group.svg" alt="plush unicorn">
-        
+
     </div>
     <div class="paragraph">
         <p>
             Olá,<br>
-            Agradecemos seu interesse em estagiar na Tutiplast e por participar do nosso teste de <br> 
-            front-end. Este teste foi desenvolvido para avaliar suas habilidades e conhecimentos na <br> 
+            Agradecemos seu interesse em estagiar na Tutiplast e por participar do nosso teste de <br>
+            front-end. Este teste foi desenvolvido para avaliar suas habilidades e conhecimentos na <br>
             área, portanto, não se preocupe se não conseguir completar todas as tarefas. O objetivo é <br>
             entender seu processo de resolução de problemas e seu conhecimento técnico.
         </p>
@@ -21,35 +21,99 @@
     <div class="test-box">
         <h6>Tipo de teste</h6>
         <div class="buttons">
-          <span :class="activeButton === 'front-end' ? 'button-active' : 'button-inactive'" @click="toggleButton('front-end')">
-            front-end <img :src="activeButton === 'front-end' ? '../assets/happyface.svg' : '../assets/sadface.svg'" alt="">
-          </span>
-          <span :class="activeButton === 'back-end' ? 'button-active' : 'button-inactive'" @click="toggleButton('back-end')">
-            back-end <img :src="activeButton === 'back-end' ? '../assets/happyface.svg' : '../assets/sadface.svg'" alt="">
-          </span>
+            <span :class="activeButton === 'front-end' ? 'button-active' : 'button-inactive'"
+                @click="toggleButton('front-end')">
+                front-end <img :src="activeButton === 'front-end' ? '../assets/happyface.svg' : '../assets/sadface.svg'"
+                    alt="">
+            </span>
+            <span :class="activeButton === 'back-end' ? 'button-active' : 'button-inactive'"
+                @click="toggleButton('back-end')">
+                back-end <img :src="activeButton === 'back-end' ? '../assets/happyface.svg' : '../assets/sadface.svg'"
+                    alt="">
+            </span>
         </div>
-     </div>
-    
+    </div>
+
+    <div class="stacks" v-show="activeButton === 'front-end'">
+        <div class="button-arrow" :class="{ 'hidden': currentIndex === 0 }" @click="navigateLeft">
+            <img src="../assets/images/arrow-left.png" alt="Arrow Left">
+        </div>
+        <div class="row-stack">
+            <div class="stack stack-front pink" @click="selectStack('SASS')">
+                <img src="../assets/images/sass.png" alt="SASS">
+            </div>
+            <div class="stack stack-front green" @click="selectStack('VUE')">
+                <img src="../assets/images/vue.png" alt="VUE">
+            </div>
+            <div class="stack stack-front blue" @click="selectStack('Typescript')">
+                <img src="../assets/images/ts.png" alt="Typescript">
+            </div>
+            <div class="stack stack-front white" @click="selectStack('Github')">
+                <img src="../assets/images/github.png" alt="GIthub">
+            </div>
+            <div class="stack stack-front orange" @click="selectStack('HTML')">
+                <img src="../assets/images/html.png" alt="HTML">
+            </div>
+            <div class="stack stack-front yellow" @click="selectStack('Javascript')">
+                <img src="../assets/images/js.png" alt="Javascript">
+            </div>
+            <div class="stack stack-front blue" @click="selectStack('CSS')">
+                <img src="../assets/images/css.png" alt="CSS">
+            </div>
+        </div>
+        <div class="button-arrow" :class="{ 'hidden': currentIndex + itemsPerPage >= stacks.length }"
+            @click="navigateRight">
+            <img src="../assets/images/arrow-right.png" alt="Arrow Right">
+        </div>
+    </div>
+
 
 </template>
 
 <script>
-import { ref } from 'vue';
-
 export default {
  name: 'AppText',
- setup() {
-    const activeButton = ref('front-end');
-
-    function toggleButton(button) {
-      activeButton.value = button;
-    }
-
+ data() {
     return {
-      activeButton,
-      toggleButton,
+      activeButton: 'front-end',
+      currentIndex: 0,
+      itemsPerPage: 3,
+      stacks: [
+            { name: 'SASS', image: '../assets/images/sass.png' },
+            { name: 'VUE', image: '../assets/images/vue.png' },
+            { name: 'Typescript', image: '../assets/images/ts.png' },
+            { name: 'Github', image: '../assets/images/github.png' },
+            { name: 'HTML', image: '../assets/images/html.png' },
+            { name: 'Javascript', image: '../assets/images/js.png' },
+            { name: 'CSS', image: '../assets/images/css.png' },
+        ]
     };
  },
+ methods: {
+    toggleButton(button) {
+      this.activeButton = button;
+    },
+    selectStack(stackName) {
+      console.log(`Stack selecionado: ${stackName}`);
+    },
+
+     navigateLeft() {
+         if (this.currentIndex > 0) {
+             this.currentIndex -= this.itemsPerPage;
+         }
+     },
+     navigateRight() {
+         if (this.currentIndex + this.itemsPerPage < this.stacks.length) {
+             this.currentIndex += this.itemsPerPage;
+         }
+     },
+ },
+ computed: {
+    visibleStacks() {
+        return this.stacks.slice(this.currentIndex, this.currentIndex + this.itemsPerPage);
+    },
+},
+
 };
 </script>
 
@@ -174,5 +238,52 @@ h1 {
     content: url('../assets/sadface.svg');
 }
 
+.stacks {
+    display: flex;
+    justify-content: space-between;
+    width: 504px;
+    height: 113px;
+    border-radius: 67.57px;
+    background: #D9D9D9;
+    margin-left: 9.9%;
+    margin-top: 2%;
+    overflow-x: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding: 5px;
+    padding-right: 0%;
+}
 
+
+.row-stack {
+    display: flex;
+    flex-wrap: nowrap;
+    transition: transform 0.3s ease-in-out;
+    width: 100px;
+    height: 100px;
+}
+
+.stack {
+    flex: 0 0 auto;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.stack img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+
+.stacks::-webkit-scrollbar {
+    display: none;
+}
+
+.hidden {
+    display: none;
+}
+
+.button-arrow{
+    cursor: pointer;
+}
 </style>

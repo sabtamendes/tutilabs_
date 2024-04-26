@@ -4,6 +4,7 @@
     <AppHeader></AppHeader>
     <AppText></AppText>
   </body>
+
 </template>
 
 <script lang="ts">
