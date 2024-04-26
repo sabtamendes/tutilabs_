@@ -5,3 +5,10 @@ body * {
     font-family: 'Poppins', sans-serif;
     background-origin: rgb(55, 0, 255);
 }
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-default), sans-serif;
+  }
