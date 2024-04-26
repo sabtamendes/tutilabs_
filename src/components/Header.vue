@@ -1,6 +1,6 @@
 <template>
     <header>
-        <img src="../assets/Tutilabs-logo 3.svg" alt="alternatetext">
+        <img src="../assets/Tutilabs-logo 3.svg" alt="logo da tutilabs">
         <a class="btn" href="https://linkedin.com/in/bruno-cmarinho">feito por: Bruno marinho</a>
     </header>
 
@@ -16,13 +16,14 @@ export default {
 header {
     background-color: #d7d2d2;
     border-radius: 5px;
+    width: 80%;
     height: 69px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
     padding: 10px;
-
+    margin: 0 auto;
 }
 
 a {
