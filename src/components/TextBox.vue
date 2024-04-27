@@ -36,40 +36,67 @@
 
     <div class="toolbar">
         <div class="stacks" v-show="activeButton === 'front-end'">
-            <div class="button-arrow" :class="{ 'hidden': currentIndex === 0 }" @click="navigateLeft">
+            <div class="button-arrow left" :class="{ 'hidden': currentIndex === 0 }" @click="navigateLeft">
                 <img src="../assets/images/arrow-left.png" alt="Arrow Left">
             </div>
             <div class="row-stack">
-                <div class="stack stack-front pink" @click="selectStack('SASS')">
+                <div class="stack" @click="selectStack('SASS')">
                     <img src="../assets/images/sass.png" alt="SASS">
                 </div>
-                <div class="stack stack-front green" @click="selectStack('VUE')">
+                <div class="stack" @click="selectStack('VUE')">
                     <img src="../assets/images/vue.png" alt="VUE">
                 </div>
-                <div class="stack stack-front blue" @click="selectStack('Typescript')">
+                <div class="stack" @click="selectStack('TYPESCRIPT')">
                     <img src="../assets/images/ts.png" alt="Typescript">
                 </div>
-                <div class="stack stack-front white" @click="selectStack('Github')">
+                <div class="stack" @click="selectStack('GITHUB')">
                     <img src="../assets/images/github.png" alt="Github">
                 </div>
-                <div class="stack stack-front orange" @click="selectStack('HTML')">
+                <div class="stack" @click="selectStack('HTML')">
                     <img src="../assets/images/html.png" alt="HTML">
                 </div>
-                <div class="stack stack-front yellow" @click="selectStack('Javascript')">
+                <div class="stack" @click="selectStack('JAVASCRIPT')">
                     <img src="../assets/images/js.png" alt="Javascript">
                 </div>
-                <div class="stack stack-front blue" @click="selectStack('CSS')">
+                <div class="stack" @click="selectStack('CSS')">
                     <img src="../assets/images/css.png" alt="CSS">
                 </div>
             </div>
-            <div class="button-arrow" :class="{ 'hidden': currentIndex + itemsPerPage >= stacks.length }"
+            <div class="button-arrow right" :class="{ 'hidden': currentIndex + itemsPerPage >= stacks.length }"
                 @click="navigateRight">
                 <img src="../assets/images/arrow-right.png" alt="Arrow Right">
             </div>
         </div>
 
-        <div class="terminal">
-            <h2>SASS</h2>
+        <div class="stacks" v-show="activeButton === 'back-end'">
+            <div class="button-arrow left" :class="{ 'hidden': currentIndex === 0 }" @click="navigateLeft">
+                <img src="../assets/images/arrow-left.png" alt="Arrow Left">
+            </div>
+            <div class="row-stack">
+                <div class="stack" @click="selectStack('MYSQL')">
+                    <img src="../assets/images/mysql.png" alt="MYSQL">
+                </div>
+                <div class="stack" @click="selectStack('PRISMA')">
+                    <img src="../assets/images/prisma.png" alt="PRISMA">
+                </div>
+                <div class="stack" @click="selectStack('TYPESCRIPT')">
+                    <img src="../assets/images/ts.png" alt="Typescript">
+                </div>
+                <div class="stack" @click="selectStack('GITHUB')">
+                    <img src="../assets/images/tigre.png" alt="Github">
+                </div>
+                <div class="stack" @click="selectStack('NODE')">
+                    <img src="../assets/images/node.png" alt="NODE">
+                </div>
+            </div>
+            <div class="button-arrow right" :class="{ 'hidden': currentIndex + itemsPerPage >= stacks.length }"
+                @click="navigateRight">
+                <img src="../assets/images/arrow-right.png" alt="Arrow Right">
+            </div>
+        </div>
+
+        <div class="text-box" v-show="showTextBox">
+            <h2>{{ selectedStack }}</h2>
             <hr>
             <p>Lorem ipsum dolor sit amet consectetur. Est ac tristique congue at nunc. Urna ullamcorper tortor blandit
                 at interdum eget. Ut ipsum ut dolor dolor diam in. Pharetra sit ultrices vitae turpis augue tempor.
@@ -82,7 +109,7 @@
             </p>
         </div>
 
-        <div>
+        <div v-show="showOverlay">
             <b-overlay :show="show" rounded="sm">
                 <div class="image-container">
                     <img src="../assets/images/Mask group.png" alt="Imagem de fundo">
@@ -93,55 +120,61 @@
                     </div>
                 </div>
             </b-overlay>
-            <span class="button-overlay" @click="show = !show">Visualizar <img src="../assets/images/arrow.png"
-                    alt=""></span>
+            <span class="button-overlay">Visualizar <img src="../assets/images/arrow.png" alt=""></span>
         </div>
     </div>
 </template>
 
 <script>
 export default {
- name: 'AppText',
- data() {
-    return {
-      activeButton: 'front-end',
-      currentIndex: 0,
-      itemsPerPage: 3,
-      stacks: [
-            { name: 'SASS', image: '../assets/images/sass.png' },
-            { name: 'VUE', image: '../assets/images/vue.png' },
-            { name: 'Typescript', image: '../assets/images/ts.png' },
-            { name: 'Github', image: '../assets/images/github.png' },
-            { name: 'HTML', image: '../assets/images/html.png' },
-            { name: 'Javascript', image: '../assets/images/js.png' },
-            { name: 'CSS', image: '../assets/images/css.png' },
-        ]
-    };
- },
- methods: {
-    toggleButton(button) {
-      this.activeButton = button;
+    name: 'AppText',
+    data() {
+        return {
+            showTextBox: false,
+            showOverlay: false,
+            selectedStack: '',
+            activeButton: 'front-end',
+            currentIndex: 0,
+            itemsPerPage: 3,
+            stacks: [
+                { name: 'SASS', image: '../assets/images/sass.png' },
+                { name: 'VUE', image: '../assets/images/vue.png' },
+                { name: 'Typescript', image: '../assets/images/ts.png' },
+                { name: 'Github', image: '../assets/images/github.png' },
+                { name: 'HTML', image: '../assets/images/html.png' },
+                { name: 'Javascript', image: '../assets/images/js.png' },
+                { name: 'CSS', image: '../assets/images/css.png' },
+            ]
+        };
     },
-    selectStack(stackName) {
-      console.log(`Stack selecionado: ${stackName}`);
-    },
+    methods: {
+        toggleButton(button) {
+            this.activeButton = button;
+        },
+        selectStack(stackName) {
+            console.log(stackName);
 
-     navigateLeft() {
-         if (this.currentIndex > 0) {
-             this.currentIndex -= this.itemsPerPage;
-         }
-     },
-     navigateRight() {
-         if (this.currentIndex + this.itemsPerPage < this.stacks.length) {
-             this.currentIndex += this.itemsPerPage;
-         }
-     },
- },
- computed: {
-    visibleStacks() {
-        return this.stacks.slice(this.currentIndex, this.currentIndex + this.itemsPerPage);
+            this.selectedStack = stackName;
+            this.showTextBox = true;
+            this.showOverlay = true;
+        },
+
+        navigateLeft() {
+            if (this.currentIndex > 0) {
+                this.currentIndex -= this.itemsPerPage;
+            }
+        },
+        navigateRight() {
+            if (this.currentIndex + this.itemsPerPage < this.stacks.length) {
+                this.currentIndex += this.itemsPerPage;
+            }
+        },
     },
-},
+    computed: {
+        visibleStacks() {
+            return this.stacks.slice(this.currentIndex, this.currentIndex + this.itemsPerPage);
+        },
+    },
 
 };
 </script>
@@ -171,14 +204,37 @@ h1 {
 }
 
 @keyframes wave-animation {
-    0% { transform: rotate(0.0deg); }
-    10% { transform: rotate(14.0deg); }
-    20% { transform: rotate(-8.0deg); }
-    30% { transform: rotate(14.0deg); }
-    40% { transform: rotate(-4.0deg); }
-    50% { transform: rotate(10.0deg); }
-    60% { transform: rotate(0.0deg); }
-    100% { transform: rotate(0.0deg); }
+    0% {
+        transform: rotate(0.0deg);
+    }
+
+    10% {
+        transform: rotate(14.0deg);
+    }
+
+    20% {
+        transform: rotate(-8.0deg);
+    }
+
+    30% {
+        transform: rotate(14.0deg);
+    }
+
+    40% {
+        transform: rotate(-4.0deg);
+    }
+
+    50% {
+        transform: rotate(10.0deg);
+    }
+
+    60% {
+        transform: rotate(0.0deg);
+    }
+
+    100% {
+        transform: rotate(0.0deg);
+    }
 }
 
 .waving {
@@ -187,7 +243,7 @@ h1 {
     animation-iteration-count: infinite;
     transform-origin: 70% 70%;
     display: inline-block;
-   }
+}
 
 .paragraph {
     font-family: Poppins;
@@ -213,7 +269,7 @@ h1 {
     align-items: flex-start;
 }
 
-.test-box h6{
+.test-box h6 {
     font-family: Poppins;
     font-size: 12.4px;
     font-weight: 700;
@@ -222,7 +278,7 @@ h1 {
     margin-bottom: 5%;
 }
 
-.buttons{
+.buttons {
     display: flex;
     justify-content: space-between;
 }
@@ -271,7 +327,7 @@ h1 {
     display: flex;
     justify-content: space-between;
     width: 40%;
-    height: 113px;
+    height: 130px;
     border-radius: 67.57px;
     background: #D9D9D9;
     overflow-x: hidden;
@@ -279,7 +335,7 @@ h1 {
     scrollbar-width: none;
     padding: 5px;
     padding-right: 0%;
-    margin-right:5%;
+    margin-right: 5%;
 }
 
 .row-stack {
@@ -297,8 +353,8 @@ h1 {
 }
 
 .stack img {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     border-radius: 50%;
 }
 
@@ -310,11 +366,19 @@ h1 {
     display: none;
 }
 
-.button-arrow{
+.button-arrow {
     cursor: pointer;
 }
 
-.terminal {
+.button-arrow.right{
+background-color: #d9d9d9;
+}
+
+.button-arrow.left{
+    background-color: #d9d9d9;
+}
+
+.text-box {
     background-color: #ececec;
     color: #000000;
     width: 480px;
@@ -327,7 +391,7 @@ h1 {
     margin-right: 8%;
 }
 
-.terminal h2 {
+.text-box h2 {
     font-family: Poppins;
     font-size: 15px;
     font-weight: 700;
@@ -335,7 +399,7 @@ h1 {
     text-align: left;
 }
 
-.terminal p {
+.text-box p {
     font-family: Poppins;
     font-size: 12px;
     font-weight: 400;
@@ -354,8 +418,8 @@ hr {
 
 .image-container {
     position: relative;
-    width: 288px;
-    height: 311px;
+    width: 300px;
+    height: 313px;
     background-color: #4c577d;
     border-radius: 20px;
 }
@@ -410,8 +474,8 @@ hr {
     display: flex;
     justify-content: space-between;
     width: 80%;
-    margin-top: 4%;
+    margin-top: 3%;
     position: relative;
-    left: 10%;
+    left: 9.7%;
 }
 </style>

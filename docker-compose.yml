@@ -1,0 +1,13 @@
+version: '3.7'
+
+services:
+  frontend:
+    image: tutilabs/frontend:latest
+    build: .
+    restart: always
+    volumes:
+      - .:/app
+    container_name: tutilabs-app
+    command: npm run serve
+    ports:
+      - 8080:8080
