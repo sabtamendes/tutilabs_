@@ -38,7 +38,7 @@ export default {
 
 span {
     color: #424242;
-    font-size: 4.6vw;
+    font-size: 4vw;
     white-space: nowrap;
     font-weight: 500;
 }
@@ -50,7 +50,7 @@ p {
     line-height: 16.1px;
     color: black;
     text-align: justify;
-    font-size: 0.9rem;
+    font-size: 0.7rem;
 }
 
 .image-container {
@@ -64,8 +64,8 @@ p {
 }
 .unicorn-image {
     border-radius: 25px;
-    width: 50vw;
-    height: 20vw;
+    width: 45vw;
+    height: 25vw;
 }
 
 @keyframes wave-animation {
