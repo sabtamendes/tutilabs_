@@ -18,7 +18,7 @@
     <div class="toolbar">
         <div class="stacks" v-show="activeButton === 'front-end'">
             <div class="button-arrow left" :class="{ 'hidden': currentIndex === 0 }" @click="navigateLeft">
-                <img src="../assets/images/arrow-left.png" alt="Arrow Left">
+                <img src="../assets/images/arrow-right.png" alt="Arrow Left">
             </div>
             <div class="row-stack">
                 <div class="stack" @click="selectStack('SASS')">
@@ -45,7 +45,7 @@
             </div>
             <div class="button-arrow right" :class="{ 'hidden': currentIndex + itemsPerPage >= stacks.length }"
                 @click="navigateRight">
-                <img src="../assets/images/arrow-right.png" alt="Arrow Right">
+                <img src="../assets/images/arrow-left.png" alt="Arrow Right">
             </div>
         </div>
 
@@ -72,7 +72,7 @@
             </div>
             <div class="button-arrow right" :class="{ 'hidden': currentIndex + itemsPerPage >= stacks.length }"
                 @click="navigateRight">
-                <img src="../assets/images/arrow-right.png" alt="Arrow Right">
+                <img src="../assets/images/arrow-left.png" alt="Arrow Right">
             </div>
         </div>
 
@@ -108,7 +108,7 @@
 
 <script>
 export default {
-    name: 'AppText',
+    name: 'AppStacks',
     data() {
         return {
             showTextBox: false,
@@ -164,7 +164,7 @@ export default {
 <style scoped>
 .test-box {
     width: 15%;
-    margin-top: 1%;
+    margin-top: -5%;
     margin-left: 10%;
     align-items: flex-start;
 }
@@ -223,39 +223,49 @@ export default {
     content: url('../assets/sadface.svg');
 }
 
+.button-arrow.right img{
+    background-color: #d9d9d9;
+    padding-bottom: 7%;
+}
+
+.button-arrow.left img{
+    background-color: #d9d9d9;
+}
+
 .stacks {
     display: flex;
     justify-content: space-between;
-    width: 40%;
-    height: 130px;
-    border-radius: 67.57px;
+    width: 32vw; 
+    height: 8.25rem; 
+    border-radius: 4.25rem; 
     background: #D9D9D9;
     overflow-x: hidden;
     -ms-overflow-style: none;
     scrollbar-width: none;
-    padding: 5px;
-    padding-right: 0%;
-    margin-right: 5%;
+    padding: 0.3125rem; 
+    padding-right: 0; 
+    margin-right: 3.125rem;
 }
 
 .row-stack {
     display: flex;
     flex-wrap: nowrap;
     transition: transform 0.3s ease-in-out;
-    width: 100px;
-    height: 100px;
+    width: 6.25rem; 
+    height: 6.25rem; 
+    padding-bottom: 0%;
 }
 
 .stack {
     flex: 0 0 auto;
-    margin-right: 10px;
+    margin-right: 0.625rem; 
     cursor: pointer;
 }
 
 .stack img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+    width: 7.5rem; 
+    height: 7.5rem; 
+    border-radius: 3.75rem; 
 }
 
 .stacks::-webkit-scrollbar {
@@ -270,50 +280,43 @@ export default {
     cursor: pointer;
 }
 
-.button-arrow.right{
-background-color: #d9d9d9;
-}
-
-.button-arrow.left{
-    background-color: #d9d9d9;
-}
-
 .text-box {
     background-color: #ececec;
     color: #000000;
-    width: 480px;
-    height: 311px;
-    padding: 20px;
-    border-radius: 25px;
-    border: 1px solid black;
+    width: 20vw;
+    max-width: 480px; 
+    height: 19.6rem; 
+    padding: 1.25rem; 
+    border-radius: 1.5625rem; 
+    border: 0.0625rem solid black; 
     font-family: Poppins;
     overflow: auto;
-    margin-right: 8%;
+    margin-right: 2%;
 }
 
 .text-box h2 {
     font-family: Poppins;
-    font-size: 15px;
+    font-size: 0.9375rem; 
     font-weight: 700;
-    line-height: 16.5px;
+    line-height: 1.5rem; 
     text-align: left;
 }
 
 .text-box p {
     font-family: Poppins;
-    font-size: 12px;
+    font-size: 0.75rem;
     font-weight: 400;
-    line-height: 13.2px;
+    line-height: 0.8125rem;
     text-align: left;
-    margin-top: 5%;
+    margin-top: 4.5%;
 }
 
 hr {
     border: none;
-    height: 1px;
+    height: 0.0625rem;
     background-color: #000000;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin-top: 0.625rem; 
+    margin-bottom: 0.625rem; 
 }
 
 .image-container {
@@ -374,8 +377,90 @@ hr {
     display: flex;
     justify-content: space-between;
     width: 80%;
-    margin-top: 3%;
+    margin-top: 1.5%;
     position: relative;
     left: 9.7%;
+}
+
+@media (max-width: 600px) {
+    .test-box {
+        width: 60%;
+        margin-top: -1%;
+        margin-left: 3.5%;
+        align-items: flex-start;
+    }
+    .toolbar {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        width: 80rem;
+        margin-top: 3%;
+        position: relative;
+        left: -0.2%;
+    }
+    .stack {
+        flex: 0 0 auto;
+        margin-right: 0.8rem; 
+        cursor: pointer;
+        padding-bottom: 0%;
+        height: 0%;
+    }
+  
+    .stacks {
+        width: 25.5rem; 
+        height: 5.7rem; 
+        border-radius: 4.25rem; 
+        background: #D9D9D9;
+        overflow-x: hidden;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        padding-bottom: 0%;
+        margin-left: 1%;
+    }
+
+    .row-stack {
+        display: flex;
+        flex-wrap: nowrap;
+        transition: transform 0.3s ease-in-out;
+        padding: 0%;
+    }
+    
+    .stack img {
+        width: 19vw;
+        height: fit-content;
+    }
+
+    .button-arrow.right img{
+        width: 17vw;
+    }
+        
+    .button-arrow.left img{
+        width: 17vw;
+    }
+
+    .text-box {
+        width: 25.5rem;
+        margin-top: 2%;
+        margin-left: 1.2%;
+        margin-bottom: -3%;
+    }
+
+    .image-container {
+        margin-left: 1.2%;
+        width: 25rem;
+    }
+
+    .image-container img {
+        margin-left: 1.2%;
+        width: 25rem;
+    }
+
+    .button-overlay {
+        position: absolute;
+        top: 94%;
+        left: 21.5%;
+        width: 10%;
+        height: 5%;
+    }
 }
 </style>

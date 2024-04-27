@@ -3,7 +3,7 @@
   <body>
     <AppHeader></AppHeader>
     <AppNavbar></AppNavbar> 
-    <!-- <AppText></AppText> -->
+    <AppStacks></AppStacks>
   </body>
 
 </template>
@@ -11,14 +11,14 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import AppHeader from './components/Header.vue';
-// import AppText from './components/TextBox.vue';
+import AppStacks from './components/StackBox.vue';
 import AppNavbar from './components/Navbar.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
     AppHeader,
-    // AppText,
+    AppStacks,
     AppNavbar
   }
 });
