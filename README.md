@@ -1,6 +1,6 @@
 # Tutilabs 🚀
 
-### 📄👀 Documentação
+### 📄 Documentação
 
 Este teste foi desenvolvido como parte do processo seletivo para a Tutilabs. Consiste em uma aplicação web com funcionalidades específicas e regras a serem seguidas. 
 
